@@ -15,6 +15,13 @@ namespace WebApplicationBasic.Controllers
         };
 
         [HttpGet("[action]")]
+        public IEnumerable<string> data()
+        {
+            var items = new List<string> { "test1", "test2", "test3" };
+            return items;
+        }
+
+        [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();
