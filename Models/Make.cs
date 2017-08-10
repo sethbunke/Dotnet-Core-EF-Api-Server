@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dotnet_Core_EF_Api_Server.Models
 {
-    [Table("Models")]
     public class Make
     {
         

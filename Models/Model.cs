@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dotnet_Core_EF_Api_Server.Models
 {
+    [Table("Models")]
     public class Model
     {
         public int Id { get; set; }
