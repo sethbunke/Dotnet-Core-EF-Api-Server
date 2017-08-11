@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dotnet_Core_EF_Api_Server.Models
 {
+    [Table("Makes")]
     public class Make
     {
         
