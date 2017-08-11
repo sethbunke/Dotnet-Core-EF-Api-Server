@@ -5,8 +5,12 @@ namespace Dotnet_Core_EF_Api_Server.Persistence
 {
     public class VegaDbContext : DbContext 
     {
-        public VegaDbContext(DbContextOptions<VegaDbContext> options) : base(options){}
+        public VegaDbContext(DbContextOptions<VegaDbContext> options) 
+          : base(options)
+        {
+        }
 
-        public DbSet<Make> Make { get; set; }
+        public DbSet<Make> Makes { get; set; }
+        public DbSet<Model> Models { get; set; } 
     }
 }

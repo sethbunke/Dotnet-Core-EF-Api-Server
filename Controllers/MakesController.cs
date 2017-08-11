@@ -8,14 +8,14 @@ namespace Dotnet_Core_EF_Api_Server.Controllers
 {
     public class MakesController : Controller
     {
-        private readonly VegaDbContext context;
+        private readonly Dotnet_Core_EF_Api_Server.Persistence.VegaDbContext context;
 
-        public MakesController(VegaDbContext context)
+        public MakesController(Dotnet_Core_EF_Api_Server.Persistence.VegaDbContext context)
         {
-            this.context = context;
+            this.context = context; 
 
         }
-        
+
         [HttpGet("/api/makes")]
         public async Task<IEnumerable<Make>> GetMakes()
         {
