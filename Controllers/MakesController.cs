@@ -15,7 +15,7 @@ namespace Dotnet_Core_EF_Api_Server.Controllers
             this.context = context;
 
         }
-
+        
         [HttpGet("/api/makes")]
         public async Task<IEnumerable<Make>> GetMakes()
         {
