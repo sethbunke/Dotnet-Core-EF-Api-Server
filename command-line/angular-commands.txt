@@ -1,0 +1,7 @@
+npm install @angular/cli@latest -g
+
+#create a new app to get the .angular-cli.json
+ng new hello-world
+
+#add dev dependency
+npm install @angular/cli@latest --save-dev
