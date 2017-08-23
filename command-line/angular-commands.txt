@@ -5,3 +5,12 @@ ng new hello-world
 
 #add dev dependency
 npm install @angular/cli@latest --save-dev
+
+#go to component folder to add new component
+ng g component vehicle-form
+
+#create in the component folder and add to the module up one level
+ng g c vehicle-form -m ../app.module.shared.ts
+
+
+
