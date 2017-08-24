@@ -1,3 +1,6 @@
 
+#environment setup - set in environment variable for USER
+set ASPNETCORE_ENVIRONMENT="Development"
+
 dotnet add package AutoMapper
 dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 1.2.0
