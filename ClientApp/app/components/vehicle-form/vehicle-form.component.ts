@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VehicleFormComponent implements OnInit {
 
-  makes;
+  makes: any[];
+  vehicle: any = {};
+  models: any[];
 
   constructor(private makeService: MakeService) { }
 
@@ -20,6 +22,13 @@ export class VehicleFormComponent implements OnInit {
 
     });
     
+  }
+
+  onMakeChange() {
+    let selectedMake = this.makes.find(m => m.id == this.vehicle.make)
+    this.models = selectedMake.models;
+    
+    console.log("vehicle: ", this.vehicle);
   }
 
 }
