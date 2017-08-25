@@ -14,6 +14,7 @@ ng g c vehicle-form -m ../app.module.shared.ts
 
 #create a make service - create and navigate to services folder first
 ng g service make
+ng g service feature
 
 
 
