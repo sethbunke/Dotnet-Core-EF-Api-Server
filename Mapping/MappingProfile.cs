@@ -10,6 +10,7 @@ namespace Dotnet_Core_EF_Api_Server.Mapping
         {
             CreateMap<Make, MakeResource>();
             CreateMap<Model, ModelResource>();
+            CreateMap<Feature, FeatureResource>();
         }
     }
 }

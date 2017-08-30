@@ -1,0 +1,13 @@
+
+#adds a new migration
+dotnet ef migrations add AddVehicleFeatures
+
+#removes last migration that has not been applied to DB
+dotnet ef migrations remove
+
+#update database with lasest migration
+dotnet ef database update
+
+#to go back to a previous migration - then either update database or delete files for 
+#the migration that was rolled back and re-do the migration
+dotnet ef database update AddVehicleFeatures

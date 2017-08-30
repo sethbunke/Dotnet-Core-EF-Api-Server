@@ -8,9 +8,10 @@ using Dotnet_Core_EF_Api_Server.Persistence;
 namespace DotnetCoreEFApiServer.Migrations
 {
     [DbContext(typeof(VegaDbContext))]
-    partial class VegaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170830003450_AddVehicleFeatures")]
+    partial class AddVehicleFeatures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
