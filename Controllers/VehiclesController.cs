@@ -8,16 +8,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet_Core_EF_Api_Server.Controllers
 {
-    public class VehicleController : Controller
+    [Route("/api/vehicles")]
+    public class VehiclesController : Controller
     {
         private readonly Dotnet_Core_EF_Api_Server.Persistence.VegaDbContext context;
         private readonly IMapper mapper;
 
-        public VehicleController(Dotnet_Core_EF_Api_Server.Persistence.VegaDbContext context, IMapper mapper)
+        public VehiclesController(Dotnet_Core_EF_Api_Server.Persistence.VegaDbContext context, IMapper mapper)
         {
             this.mapper = mapper;
             this.context = context;
 
+        }
+
+        [HttpPost]
+        public IActionResult CreateVehicle([FromBody] VehicleResource vehicleResource) 
+        {
+            System.Console.Out.WriteLine(vehicleResource);
+            var mappedResult = Mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+            return Ok(mappedResult);
         }
 
         // [HttpGet("/api/features")]
