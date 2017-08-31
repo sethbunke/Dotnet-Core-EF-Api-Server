@@ -5,6 +5,7 @@ namespace Dotnet_Core_EF_Api_Server.Persistence
 {
     public class VegaDbContext : DbContext 
     {
+        public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Make> Makes { get; set; }
         public DbSet<Model> Models { get; set; } 
 

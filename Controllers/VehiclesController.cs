@@ -22,11 +22,17 @@ namespace Dotnet_Core_EF_Api_Server.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateVehicle([FromBody] VehicleResource vehicleResource) 
+        public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource) 
         {
             System.Console.Out.WriteLine(vehicleResource);
-            var mappedResult = Mapper.Map<VehicleResource, Vehicle>(vehicleResource);
-            return Ok(mappedResult);
+            var vehicle = Mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+
+            context.Vehicles.Add(vehicle);
+            await context.SaveChangesAsync();
+
+            var updatedVehicleResource = Mapper.Map<Vehicle, VehicleResource>(vehicle);
+
+            return Ok(updatedVehicleResource);
         }
 
         // [HttpGet("/api/features")]
