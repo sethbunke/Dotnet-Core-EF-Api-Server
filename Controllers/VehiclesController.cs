@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -24,15 +25,39 @@ namespace Dotnet_Core_EF_Api_Server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource) 
         {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
             System.Console.Out.WriteLine(vehicleResource);
             var vehicle = Mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+            vehicle.LastUpdate = DateTime.Now;
 
             context.Vehicles.Add(vehicle);
             await context.SaveChangesAsync();
 
-            var updatedVehicleResource = Mapper.Map<Vehicle, VehicleResource>(vehicle);
+            var result = Mapper.Map<Vehicle, VehicleResource>(vehicle);
 
-            return Ok(updatedVehicleResource);
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdteVehicle(int id, [FromBody] VehicleResource vehicleResource) 
+        {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
+            System.Console.Out.WriteLine(vehicleResource);
+
+            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+            Mapper.Map<VehicleResource, Vehicle>(vehicleResource, vehicle);
+            vehicle.LastUpdate = DateTime.Now;
+            await context.SaveChangesAsync();
+
+            var result = Mapper.Map<Vehicle, VehicleResource>(vehicle);
+
+            return Ok(result);
         }
 
         // [HttpGet("/api/features")]
