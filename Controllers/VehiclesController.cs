@@ -22,6 +22,22 @@ namespace Dotnet_Core_EF_Api_Server.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+
+            if (vehicle == null) 
+            {
+                return NotFound(id);
+            }
+
+            var vehicleResource = mapper.Map<Vehicle, VehicleResource>(vehicle);
+
+            return Ok(vehicleResource);
+
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource) 
         {
@@ -51,6 +67,12 @@ namespace Dotnet_Core_EF_Api_Server.Controllers
             System.Console.Out.WriteLine(vehicleResource);
 
             var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+            
+            if (vehicle == null) 
+            {
+                return NotFound(id);
+            }
+            
             Mapper.Map<VehicleResource, Vehicle>(vehicleResource, vehicle);
             vehicle.LastUpdate = DateTime.Now;
             await context.SaveChangesAsync();
@@ -58,6 +80,22 @@ namespace Dotnet_Core_EF_Api_Server.Controllers
             var result = Mapper.Map<Vehicle, VehicleResource>(vehicle);
 
             return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteVehicle(int id) 
+        {
+            var vehicle = await context.Vehicles.FindAsync(id);
+
+            if (vehicle == null) 
+            {
+                return NotFound(id);
+            }
+
+            context.Remove(vehicle);
+            await context.SaveChangesAsync();
+
+            return Ok(id);
         }
 
         // [HttpGet("/api/features")]
